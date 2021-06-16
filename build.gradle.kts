@@ -46,17 +46,17 @@ tasks.withType<KotlinCompile> {
 }
 
 object Constants {
-	val exclusionsForJacoco: List<String> = emptyList()
+	val exclusionsForJacoco: List<String> =
+		listOf("**BankAccountApplication.kt")
 }
-
 
 apply(plugin = "jacoco")
 
 sonarqube {
 	properties {
 		property ("sonar.sourceEncoding", "UTF-8")
-		property ("sonar.projectName", "${project.name}")
-		property ("sonar.projectKey", "${project.name}")
+		property ("sonar.projectName", project.name)
+		property ("sonar.projectKey", project.name)
 		property ("sonar.host.url", "http://localhost:9000")
 		property ("sonar.login", "22259ea51ddf48b8fce1b7a741551a25287a8245")
 		property ("sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec")
@@ -71,4 +71,8 @@ tasks.jacocoTestReport {
 		csv.required.set(false)
 		html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 	}
+}
+
+tasks.test {
+	finalizedBy("jacocoTestReport")
 }
