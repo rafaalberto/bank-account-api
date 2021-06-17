@@ -47,7 +47,7 @@ tasks.withType<KotlinCompile> {
 
 object Constants {
 	val exclusionsForJacoco: List<String> =
-		listOf("**BankAccountApplication.kt")
+		listOf("**BankAccountApplication.kt", "**ApiExceptionHandler.kt")
 }
 
 apply(plugin = "jacoco")
